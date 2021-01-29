@@ -35,7 +35,7 @@ def get_mtimes():
         except_dir = '.git'
         if except_dir not in i[0].split('\\'):
             for each_file in i[2]:
-                full_name = f'{i[0]}/{each_file}'
+                full_name = os.path.join(i[0], each_file)
                 # 获取文件的修改时间
                 yield full_name, os.stat(full_name).st_mtime
 
