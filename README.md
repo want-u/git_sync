@@ -1,6 +1,9 @@
 # git文件夹同步托盘
 ![image.png](https://pic.rmb.bdstatic.com/bjh/39d32b54bd2905d6e551b8245d76beab.png)
 
+准备：
+- 在本地初始化git文件夹或克隆到本地
+
 功能：
 - 指定需要向github推送的本地文件夹，检测到文件修改自动推送
 
