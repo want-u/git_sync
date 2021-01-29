@@ -1,5 +1,5 @@
 # git文件夹同步托盘
-![image.png](https://pic.rmb.bdstatic.com/bjh/39d32b54bd2905d6e551b8245d76beab.png)
+![](https://gitee.com/luoxian1011/pictures/raw/master/39d32b54bd2905d6e551b8245d76beab.png)
 
 准备：
 - 在本地初始化git文件夹或克隆到本地
