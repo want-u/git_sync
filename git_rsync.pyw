@@ -1,3 +1,5 @@
+# print('hello pycharm')
+
 # -*- coding: utf-8 -*-
 # @Author  : LuoXian
 # @Date    : 2021/1/28 22:45
@@ -54,6 +56,12 @@ def init_item():
         data = f'Set Ws = CreateObject("Wscript.Shell")\nWs.Run("{bat_file}"),0'
         f.write(data)
 
+def push_file():
+    os.popen(f'{os.path.join(dir_path, "git_push.vbs")}')
+    tp.showMessage('Git同步程序', '文件已同步', icon=0)
+    timer_push.stop()
+
+
 
 # 检查字典是否更新
 def check_file():
@@ -64,8 +72,8 @@ def check_file():
     if item != new_item:
         item = new_item.copy()
         # git同步
-        os.popen(f'{os.path.join(dir_path, "git_push.vbs")}')
-        tp.showMessage('Git同步程序', '文件已同步', icon=0)
+        # 每30min检测一次文件
+        timer_push.start(1800000)  # 设置计时间隔并启动
         return 1
     else:
         return 0
@@ -122,9 +130,12 @@ if __name__ == '__main__':
     # 参数3：图标（0没有图标 1信息图标 2警告图标 3错误图标），0还是有一个小图标
     tp.showMessage('Git同步程序', '文件数据已更新！', icon=0)
 
-    # 每10s检测一次文件
-    timer = QTimer()  # 初始化一个定时器
-    timer.timeout.connect(check_file)  # 计时结束调用operate()方法
+    timer = QTimer()  # 初始化一个主循环定时器
+    timer.timeout.connect(check_file)  # 计时结束调用check_file()方法
     timer.start(10000)  # 设置计时间隔并启动
+    
+    timer_push = QTimer()  # 初始化一个推送延时定时器
+    timer_push.timeout.connect(push_file)  # 计时结束调用push_file()方法
+    
 
     sys.exit(app.exec_())
